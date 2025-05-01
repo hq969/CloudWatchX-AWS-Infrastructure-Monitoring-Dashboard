@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudWatch Monitoring Stack
+
+Resources:
+  MonitoringTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: MySNSTopic
+
+  AlarmHighCPU:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: HighCPUAlarm
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Statistic: Average
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      AlarmActions:
+        - Ref: MonitoringTopic
+      Dimensions:
+        - Name: InstanceId
+          Value: i-xxxxxxxxxxxxxxxxx
