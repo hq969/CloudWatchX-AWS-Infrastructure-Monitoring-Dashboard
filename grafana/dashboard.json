@@ -1,0 +1,82 @@
+{
+  "id": null,
+  "title": "CloudWatchX – EC2 Monitoring",
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "CPU Utilization (%)",
+      "datasource": "CloudWatch",
+      "targets": [
+        {
+          "namespace": "AWS/EC2",
+          "metricName": "CPUUtilization",
+          "dimensions": { "InstanceId": "i-xxxxxxxxxxxxxxxxx" },
+          "stat": "Average",
+          "period": "",
+          "region": "us-east-1"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Used (%)",
+      "datasource": "CloudWatch",
+      "targets": [
+        {
+          "namespace": "CWAgent",
+          "metricName": "mem_used_percent",
+          "dimensions": { "InstanceId": "i-xxxxxxxxxxxxxxxxx" },
+          "stat": "Average",
+          "region": "us-east-1"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Disk Usage (%)",
+      "datasource": "CloudWatch",
+      "targets": [
+        {
+          "namespace": "CWAgent",
+          "metricName": "disk_used_percent",
+          "dimensions": {
+            "InstanceId": "i-xxxxxxxxxxxxxxxxx",
+            "path": "/",
+            "fstype": "xfs"
+          },
+          "stat": "Average",
+          "region": "us-east-1"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Network In/Out",
+      "datasource": "CloudWatch",
+      "targets": [
+        {
+          "namespace": "AWS/EC2",
+          "metricName": "NetworkIn",
+          "dimensions": { "InstanceId": "i-xxxxxxxxxxxxxxxxx" },
+          "stat": "Sum",
+          "region": "us-east-1"
+        },
+        {
+          "namespace": "AWS/EC2",
+          "metricName": "NetworkOut",
+          "dimensions": { "InstanceId": "i-xxxxxxxxxxxxxxxxx" },
+          "stat": "Sum",
+          "region": "us-east-1"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 }
+    }
+  ]
+}
